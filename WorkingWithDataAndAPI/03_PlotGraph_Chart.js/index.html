@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlotGraph_Chart.js</title>
+    <script src="./chart.js"></script>
+</head>
+<body>
+    <canvas id="chart" width="400" height="400"></canvas>
+    <script>
+        // Data from: https://data.giss.nasa.gov/gistemp/
+
+        const ctx = document.getElementById('chart');
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            datasets: [{
+                label: '# of Votes',
+                data: [12, 19, 3, 5, 2, 3],
+                borderWidth: 1
+            }]
+            },
+            options: {
+            scales: {
+                y: {
+                beginAtZero: true
+                }
+            }
+            }
+        });
+        getData();
+
+        async function getData() {
+            const response = await fetch('../02_TabularData_Parsing_CSV/ZonAnn.Ts+dSST.csv');
+            const data = await response.text();
+            // console.log(data);
+
+            const table = data.split('\n').slice(1);
+            table.forEach(row => {
+                const columns = row.split(',');
+                const year = columns[0];
+                const temp = columns[1];
+                console.log(year, temp);
+            })
+        }
+    </script>
+</body>
+</html>

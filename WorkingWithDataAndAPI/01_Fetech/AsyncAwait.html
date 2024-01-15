@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>async await</title>
+</head>
+<body>
+    <img src="" alt="" id="chitranna" width="480">
+    <script>
+        console.log('About to fetch a rainbow');
+
+        catchRainbow()
+            .then(response => {
+                console.log('on function haha :)');
+            })
+            .catch(error => {
+                console.log("error!");
+                console.error(error);
+            })
+
+        async function catchRainbow() {
+            const response = await fetch("Chitranna.jpeg")
+            const blob = await response.blob();
+            document.getElementById("chitranna").src = URL.createObjectURL(blob);
+        }
+
+    </script>
+</body>
+</html>

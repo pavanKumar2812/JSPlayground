@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traditional way</title>
+</head>
+<body>
+    <img src="" alt="" id="chitranna" width="480">
+    <script>
+        console.log('About to fetch a rainbow');
+        fetch("Chitranna.jpeg")
+            .then(response => {
+                console.log(response);
+                return response.blob();
+            })
+            .then(blob => {
+                console.log(blob);
+                document.getElementById("chitranna").src = URL.createObjectURL(blob);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+</body>
+</html>
